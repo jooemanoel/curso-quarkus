@@ -1,0 +1,32 @@
+{
+  "agencias": [
+    {
+      "id": 1,
+      "nome": "Agencia BSB",
+      "razaoSocial": "Asa Norte AGENCIA BSB",
+      "cnpj": "15130254000100",
+      "situacaoCadastral": "ATIVO"
+    },
+    {
+      "nome": "qwer",
+      "razaoSocial": "asdf",
+      "cnpj": "123",
+      "situacaoCadastral": "ATIVO",
+      "id": 2
+    },
+    {
+      "nome": "tyui",
+      "razaoSocial": "ghjk",
+      "cnpj": "321",
+      "situacaoCadastral": "INATIVO",
+      "id": 3
+    },
+    {
+      "nome": "Agencia DAT",
+      "razaoSocial": "Asa Sul DAT",
+      "cnpj": "263594851234",
+      "situacaoCadastral": "ATIVO",
+      "id": 4
+    }
+  ]
+}
