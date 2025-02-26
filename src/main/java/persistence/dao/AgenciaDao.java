@@ -19,6 +19,14 @@ public class AgenciaDao implements PanacheRepository<Agencia> {
         return listAll();
     }
 
+    public Agencia buscarPorId(Integer id) {
+        return findById((long) id);
+    }
+
+    public Agencia buscarPorCnpj(String cnpj) {
+        return find("cnpj", cnpj).firstResult();
+    }
+
     @Transactional
     public void incluir(Agencia agencia) {
         persist(agencia);
@@ -32,13 +40,9 @@ public class AgenciaDao implements PanacheRepository<Agencia> {
         }
     }
 
-    public Agencia buscarPorId(Integer id) {
-        return findById((long) id);
-    }
-
     @Transactional
-    public void editar(Agencia agencia) {
-        update("nome = ?1, razaoSocial = ?2, cnpj = ?3 where id = ?4", agencia.getNome(),
+    public int editar(Agencia agencia) {
+        return update("nome = ?1, razaoSocial = ?2, cnpj = ?3 where id = ?4", agencia.getNome(),
                 agencia.getRazaoSocial(), agencia.getCnpj(), agencia.getId());
     }
 }

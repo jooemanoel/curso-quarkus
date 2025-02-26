@@ -1,17 +1,14 @@
 package services;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
-import org.jboss.resteasy.reactive.ClientWebApplicationException;
 
 import exception.ErrosSistema.AgenciaInativaException;
 import exception.ErrosSistema.AgenciaNaoEncontradaException;
 import io.quarkus.logging.Log;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.core.Response;
 import persistence.dao.AgenciaDao;
 import persistence.models.Agencia;
 import persistence.models.AgenciaHttp;
@@ -32,31 +29,20 @@ public class AgenciaService {
         return dao.listar();
     }
 
-    public Response buscarPorId(Integer id) {
+    public Agencia buscarPorId(Integer id) {
         Log.info(linha + "Buscar por ID: " + id + linha);
-        try {
-            AgenciaHttp agenciaHttp = httpClient.buscarPorId(id);
-            return Response.status(Response.Status.OK).entity(agenciaHttp).build();
-        } catch (ClientWebApplicationException e) {
-            Log.info(linha + e.getMessage() + linha);
-            return Response.status(Response.Status.NOT_FOUND).entity("{}").build();
-        }
+        Agencia agencia = dao.buscarPorId(id);
+        if (agencia == null)
+            throw new AgenciaNaoEncontradaException(id.toString());
+        return agencia;
     }
 
-    public AgenciaHttp buscarPorCNPJ(String cnpj) {
+    public Agencia buscarPorCNPJ(String cnpj) {
         Log.info(linha + "Buscar por CNPJ: " + cnpj + linha);
-        List<AgenciaHttp> agencias = httpClient.listar();
-        try {
-            AgenciaHttp agenciaHttp = agencias.stream().filter(x -> x.getCnpj().equals(cnpj))
-                    .toList().getFirst();
-            return agenciaHttp;
-        } catch (NoSuchElementException e) {
-            Log.info(linha + "Não Encontrado." + linha);
-            return null;
-        }
+        return dao.buscarPorCnpj(cnpj);
     }
 
-    public int cadastrar(Agencia agencia) {
+    public Integer cadastrar(Agencia agencia) {
         List<AgenciaHttp> resultado = httpClient.listarPorCnpj(agencia.getCnpj());
         if (resultado.size() == 0) {
             Log.info(linha + "Agencia nao encontrada: " + agencia.getId() + linha);
@@ -75,11 +61,11 @@ public class AgenciaService {
     public int excluir(Integer id) {
         Log.info(linha + "Excluir: " + id + linha);
         dao.excluir(id);
-        return id;
+        return 1;
     }
 
-    public void alterar(Agencia agencia) {
+    public int alterar(Agencia agencia) {
         Log.info(linha + "Alterar: " + agencia.getId() + linha);
-        dao.editar(agencia);
+        return dao.editar(agencia);
     }
 }
