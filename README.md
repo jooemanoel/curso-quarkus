@@ -12,7 +12,7 @@ You can run your application in dev mode that enables live coding using:
 ./mvnw quarkus:dev
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+> **_NOTE:_** Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
 
 ## Packaging and running the application
 
@@ -60,3 +60,20 @@ If you want to learn more about building native executables, please consult <htt
 - Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
 - JDBC Driver - MySQL ([guide](https://quarkus.io/guides/datasource)): Connect to the MySQL database via JDBC
 - Micrometer metrics ([guide](https://quarkus.io/guides/micrometer)): Instrument the runtime and your application with dimensional metrics using Micrometer.
+
+CREATE TABLE IF NOT EXISTS endereco (
+id INT AUTO_INCREMENT PRIMARY KEY,
+rua TEXT NOT NULL,
+logradouro TEXT NOT NULL,
+complemento TEXT NOT NULL,
+numero INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS agencia (
+id INT AUTO_INCREMENT PRIMARY KEY,
+nome TEXT NOT NULL,
+razao_social TEXT NOT NULL,
+cnpj TEXT NOT NULL,
+endereco_id INT,
+FOREIGN KEY (endereco_id) REFERENCES endereco(id)
+);

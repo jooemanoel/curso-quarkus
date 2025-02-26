@@ -1,4 +1,4 @@
-package persistence.dao;
+package net.joao.persistence.dao;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-import persistence.models.Agencia;
+import net.joao.persistence.models.Agencia;
 
 @ApplicationScoped
 public class AgenciaDao implements PanacheRepository<Agencia> {
@@ -19,8 +19,8 @@ public class AgenciaDao implements PanacheRepository<Agencia> {
         return listAll();
     }
 
-    public Agencia buscarPorId(Integer id) {
-        return findById((long) id);
+    public Agencia buscarPorId(Long id) {
+        return findById(id);
     }
 
     public Agencia buscarPorCnpj(String cnpj) {
@@ -33,8 +33,8 @@ public class AgenciaDao implements PanacheRepository<Agencia> {
     }
 
     @Transactional
-    public void excluir(Integer id) {
-        Agencia agencia = findById((long) id);
+    public void excluir(Long id) {
+        Agencia agencia = findById(id);
         if (agencia != null) {
             delete(agencia);
         }

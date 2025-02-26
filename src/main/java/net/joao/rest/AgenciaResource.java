@@ -1,4 +1,4 @@
-package rest;
+package net.joao.rest;
 
 import java.util.List;
 
@@ -19,8 +19,8 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-import persistence.models.Agencia;
-import services.AgenciaService;
+import net.joao.persistence.models.Agencia;
+import net.joao.services.AgenciaService;
 
 @Path("/agencias")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -44,7 +44,7 @@ public class AgenciaResource {
     @Operation(summary = "Busca agencia por ID", description = "Retorna uma agencia")
     @APIResponse(responseCode = "200", description = "Agencia", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = Agencia.class)) })
-    public RestResponse<Agencia> buscar(int id) {
+    public RestResponse<Agencia> buscar(Long id) {
         return RestResponse.ok(agenciaService.buscarPorId(id));
     }
 
@@ -61,7 +61,7 @@ public class AgenciaResource {
     @Operation(summary = "Excluir Agencia", description = "Exclui e retorna um inteiro")
     @APIResponse(responseCode = "200", description = "Agencia", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = Agencia.class)) })
-    public RestResponse<Integer> excluir(int id) {
+    public RestResponse<Integer> excluir(Long id) {
         return RestResponse.accepted(agenciaService.excluir(id));
     }
 

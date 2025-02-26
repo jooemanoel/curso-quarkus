@@ -1,4 +1,4 @@
-package exception;
+package net.joao.exception;
 
 public class ErrosSistema {
     public static class AgenciaNaoEncontradaException extends RuntimeException {

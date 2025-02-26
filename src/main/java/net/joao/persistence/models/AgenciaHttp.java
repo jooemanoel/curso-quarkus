@@ -1,4 +1,4 @@
-package persistence.models;
+package net.joao.persistence.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

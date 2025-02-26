@@ -1,18 +1,18 @@
-package services;
+package net.joao.services;
 
 import java.util.List;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
-import exception.ErrosSistema.AgenciaInativaException;
-import exception.ErrosSistema.AgenciaNaoEncontradaException;
 import io.quarkus.logging.Log;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import persistence.dao.AgenciaDao;
-import persistence.models.Agencia;
-import persistence.models.AgenciaHttp;
-import persistence.models.SituacaoCadastral;
+import net.joao.exception.ErrosSistema.AgenciaInativaException;
+import net.joao.exception.ErrosSistema.AgenciaNaoEncontradaException;
+import net.joao.persistence.dao.AgenciaDao;
+import net.joao.persistence.models.Agencia;
+import net.joao.persistence.models.AgenciaHttp;
+import net.joao.persistence.models.SituacaoCadastral;
 
 @ApplicationScoped
 public class AgenciaService {
@@ -29,7 +29,7 @@ public class AgenciaService {
         return dao.listar();
     }
 
-    public Agencia buscarPorId(Integer id) {
+    public Agencia buscarPorId(Long id) {
         Log.info(linha + "Buscar por ID: " + id + linha);
         Agencia agencia = dao.buscarPorId(id);
         if (agencia == null)
@@ -58,7 +58,7 @@ public class AgenciaService {
         return 1;
     }
 
-    public int excluir(Integer id) {
+    public int excluir(Long id) {
         Log.info(linha + "Excluir: " + id + linha);
         dao.excluir(id);
         return 1;

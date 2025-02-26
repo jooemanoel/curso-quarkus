@@ -1,4 +1,4 @@
-package services;
+package net.joao.services;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.QueryParam;
-import persistence.models.Agencia;
-import persistence.models.AgenciaHttp;
+import net.joao.persistence.models.Agencia;
+import net.joao.persistence.models.AgenciaHttp;
 
 @RegisterRestClient(configKey = "agencias-api")
 @Path("/agencias")

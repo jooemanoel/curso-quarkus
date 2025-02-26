@@ -1,4 +1,4 @@
-import { HttpClient } from "./http.js";
+import { HttpClient, printResponse } from "./http.js";
 
 // API
 const urlJsonServer = "http://localhost:3000/agencias";
@@ -11,9 +11,11 @@ const inputCnpj = document.querySelector("#input-cnpj");
 const inputSituacaoCadastral = document.querySelector(
   "#input-situacao-cadastral"
 );
+const div = document.querySelector("#resposta");
 
 async function carregarAgencias() {
   const res = await HttpClient.get(urlJsonServer);
+  printResponse(res, div);
   let html = `<div class="row g-3">`;
   res.forEach((agencia) => {
     html += `
@@ -45,7 +47,8 @@ async function criarAgencia() {
     situacaoCadastral: inputSituacaoCadastral.value,
   };
   console.log(requisicao);
-  await HttpClient.post(urlJsonServer, requisicao);
+  const res = await HttpClient.post(urlJsonServer, requisicao);
+  printResponse(res, div);
   inputNome.value = "";
   inputRazaoSocial.value = "";
   inputCnpj.value = "";

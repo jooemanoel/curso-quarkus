@@ -1,4 +1,4 @@
-package persistence.models;
+package net.joao.persistence.models;
 
 public enum SituacaoCadastral {
     ATIVO, INATIVO;

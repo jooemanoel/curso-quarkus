@@ -1,4 +1,4 @@
-package rest;
+package net.joao.rest;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
