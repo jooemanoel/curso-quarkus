@@ -19,8 +19,8 @@ public class AgenciaDao implements PanacheRepository<Agencia> {
         return listAll();
     }
 
-    public Agencia buscarPorId(Long id) {
-        return findById(id);
+    public Agencia buscarPorId(Integer id) {
+        return findById((long) id);
     }
 
     public Agencia buscarPorCnpj(String cnpj) {
@@ -33,8 +33,8 @@ public class AgenciaDao implements PanacheRepository<Agencia> {
     }
 
     @Transactional
-    public void excluir(Long id) {
-        Agencia agencia = findById(id);
+    public void excluir(Integer id) {
+        Agencia agencia = findById((long) id);
         if (agencia != null) {
             delete(agencia);
         }

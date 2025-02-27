@@ -44,7 +44,7 @@ public class AgenciaResource {
     @Operation(summary = "Busca agencia por ID", description = "Retorna uma agencia")
     @APIResponse(responseCode = "200", description = "Agencia", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = Agencia.class)) })
-    public RestResponse<Agencia> buscar(Long id) {
+    public RestResponse<Agencia> buscar(Integer id) {
         return RestResponse.ok(agenciaService.buscarPorId(id));
     }
 
@@ -61,7 +61,7 @@ public class AgenciaResource {
     @Operation(summary = "Excluir Agencia", description = "Exclui e retorna um inteiro")
     @APIResponse(responseCode = "200", description = "Agencia", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = Agencia.class)) })
-    public RestResponse<Integer> excluir(Long id) {
+    public RestResponse<Integer> excluir(Integer id) {
         return RestResponse.accepted(agenciaService.excluir(id));
     }
 

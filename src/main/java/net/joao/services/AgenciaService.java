@@ -29,7 +29,7 @@ public class AgenciaService {
         return dao.listar();
     }
 
-    public Agencia buscarPorId(Long id) {
+    public Agencia buscarPorId(Integer id) {
         Log.info(linha + "Buscar por ID: " + id + linha);
         Agencia agencia = dao.buscarPorId(id);
         if (agencia == null)
@@ -58,7 +58,7 @@ public class AgenciaService {
         return 1;
     }
 
-    public int excluir(Long id) {
+    public int excluir(Integer id) {
         Log.info(linha + "Excluir: " + id + linha);
         dao.excluir(id);
         return 1;

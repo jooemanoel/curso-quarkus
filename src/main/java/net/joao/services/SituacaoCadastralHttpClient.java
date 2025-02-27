@@ -22,18 +22,18 @@ public interface SituacaoCadastralHttpClient {
 
     @GET
     @Path("/{id}")
-    AgenciaHttp buscarPorId(int id);
+    AgenciaHttp buscarPorId(Integer id);
 
     @POST
     void cadastrar(Agencia agencia);
 
     @DELETE
     @Path("/{id}")
-    void excluir(int id);
+    void excluir(Integer id);
 
     @PUT
     @Path("/{id}")
-    void alterar(int id, Agencia agencia);
+    void alterar(Integer id, Agencia agencia);
 
     @GET
     List<AgenciaHttp> listarPorCnpj(@QueryParam("cnpj") String cnpj);
