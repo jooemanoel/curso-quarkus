@@ -14,6 +14,7 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import net.joao.persistence.dto.AgenciaNomeRuaDTO;
 import net.joao.persistence.models.Agencia;
 import net.joao.services.AgenciaService;
 
@@ -30,6 +31,13 @@ public class AgenciaResource {
     @Operation(summary = "Listar agencias ", description = "Retorna uma lista de agencias")
     public List<Agencia> listar() {
         return agenciaService.listar();
+    }
+
+    @GET
+    @Path("/nome-agencia-rua")
+    @Operation(summary = "Listar agencias por nome e rua", description = "Retorna uma lista de agencias")
+    public List<AgenciaNomeRuaDTO> listarNomeAgenciaRua() {
+        return agenciaService.listarNomeAgenciaRua();
     }
 
     @GET

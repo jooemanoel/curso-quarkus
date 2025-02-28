@@ -10,6 +10,7 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceException;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import net.joao.persistence.dto.AgenciaNomeRuaDTO;
 import net.joao.persistence.models.Agencia;
 import net.joao.persistence.models.Endereco;
 
@@ -21,6 +22,17 @@ public class AgenciaDao {
 
     public List<Agencia> listar() {
         TypedQuery<Agencia> query = em.createNamedQuery(Agencia.LISTAR, Agencia.class);
+        try {
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return new ArrayList<>();
+        } catch (PersistenceException e) {
+            throw e;
+        }
+    }
+
+    public List<AgenciaNomeRuaDTO> listarNomeAgenciaRua() {
+        TypedQuery<AgenciaNomeRuaDTO> query = em.createNamedQuery(Agencia.LISTAR_NOME_RUA, AgenciaNomeRuaDTO.class);
         try {
             return query.getResultList();
         } catch (NoResultException e) {

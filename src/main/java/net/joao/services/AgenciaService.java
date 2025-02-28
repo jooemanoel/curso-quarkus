@@ -12,6 +12,7 @@ import net.joao.domain.SituacaoCadastral;
 import net.joao.exception.ErrosSistema.AgenciaInativaException;
 import net.joao.exception.ErrosSistema.AgenciaNaoEncontradaException;
 import net.joao.persistence.dao.AgenciaDao;
+import net.joao.persistence.dto.AgenciaNomeRuaDTO;
 import net.joao.persistence.models.Agencia;
 
 @ApplicationScoped
@@ -27,6 +28,10 @@ public class AgenciaService {
 
     public List<Agencia> listar() {
         return dao.listar();
+    }
+
+    public List<AgenciaNomeRuaDTO> listarNomeAgenciaRua() {
+        return dao.listarNomeAgenciaRua();
     }
 
     public Agencia buscarPorId(Integer id) {
@@ -54,8 +59,7 @@ public class AgenciaService {
         }
         agencia.setId(null);
         agencia.getEndereco().setId(null);
-        dao.incluir(agencia);
-        return 1;
+        return dao.incluir(agencia);
     }
 
     public int excluir(Integer id) {
