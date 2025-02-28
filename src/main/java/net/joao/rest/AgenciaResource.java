@@ -3,11 +3,6 @@ package net.joao.rest;
 import java.util.List;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
-import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
-import org.eclipse.microprofile.openapi.annotations.media.Content;
-import org.eclipse.microprofile.openapi.annotations.media.Schema;
-import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
-import org.jboss.resteasy.reactive.RestResponse;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
@@ -33,40 +28,36 @@ public class AgenciaResource {
 
     @GET
     @Operation(summary = "Listar agencias ", description = "Retorna uma lista de agencias")
-    @APIResponse(responseCode = "200", description = "Agencia", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Agencia.class, type = SchemaType.ARRAY)) })
-    public RestResponse<List<Agencia>> listar() {
-        return RestResponse.ok(agenciaService.listar());
+    public List<Agencia> listar() {
+        return agenciaService.listar();
     }
 
     @GET
     @Path("/{id}")
     @Operation(summary = "Busca agencia por ID", description = "Retorna uma agencia")
-    @APIResponse(responseCode = "200", description = "Agencia", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Agencia.class)) })
-    public RestResponse<Agencia> buscar(Integer id) {
-        return RestResponse.ok(agenciaService.buscarPorId(id));
+    public Agencia buscar(Integer id) {
+        return agenciaService.buscarPorId(id);
     }
 
     @POST
-    @Operation(summary = "Cadastrar Agencia", description = "Cadastra e retorna um inteiro")
-    @APIResponse(responseCode = "201", description = "Agencia", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Agencia.class)) })
-    public RestResponse<Integer> cadastrar(Agencia agencia) {
-        return RestResponse.accepted(agenciaService.cadastrar(agencia));
+    @Operation(summary = "Cadastrar Agencia", description = "Cadastra e retorna o ID")
+    public Integer cadastrar(Agencia agencia) {
+        return agenciaService.cadastrar(agencia);
     }
 
     @DELETE
     @Path("/{id}")
-    @Operation(summary = "Excluir Agencia", description = "Exclui e retorna um inteiro")
-    @APIResponse(responseCode = "200", description = "Agencia", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Agencia.class)) })
-    public RestResponse<Integer> excluir(Integer id) {
-        return RestResponse.accepted(agenciaService.excluir(id));
+    @Operation(summary = "Excluir Agencia", description = "Exclui e retorna o ID")
+    public Integer excluir(Integer id) {
+        return agenciaService.excluir(id);
     }
 
     @PUT
-    public RestResponse<Integer> alterar(Agencia agencia) {
-        return RestResponse.accepted(this.agenciaService.alterar(agencia));
+    @Operation(summary = "Alterar Agencia", description = "Edita e etorna a agencia")
+    public Agencia alterar(Agencia agencia) {
+        if (agencia.getEndereco() == null) {
+            agencia.setEndereco(null);
+        }
+        return this.agenciaService.alterar(agencia);
     }
 }

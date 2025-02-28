@@ -10,12 +10,12 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.QueryParam;
+import net.joao.domain.AgenciaHttp;
 import net.joao.persistence.models.Agencia;
-import net.joao.persistence.models.AgenciaHttp;
 
 @RegisterRestClient(configKey = "agencias-api")
 @Path("/agencias")
-public interface SituacaoCadastralHttpClient {
+public interface AgenciaHttpClient {
 
     @GET
     List<AgenciaHttp> listar();

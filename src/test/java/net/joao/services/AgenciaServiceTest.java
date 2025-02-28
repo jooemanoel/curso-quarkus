@@ -11,10 +11,10 @@ import org.mockito.Mockito;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
+import net.joao.domain.AgenciaHttp;
 import net.joao.exception.ErrosSistema.AgenciaNaoEncontradaException;
 import net.joao.persistence.dao.AgenciaDao;
 import net.joao.persistence.models.Agencia;
-import net.joao.persistence.models.AgenciaHttp;
 import net.joao.utils.AgenciaFixture;
 
 @QuarkusTest
@@ -25,7 +25,7 @@ public class AgenciaServiceTest {
     @Inject
     @InjectMock
     @RestClient
-    private SituacaoCadastralHttpClient httpClient;
+    private AgenciaHttpClient httpClient;
 
     @Inject
     private AgenciaService agenciaService;

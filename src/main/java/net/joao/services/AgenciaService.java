@@ -7,12 +7,12 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 import io.quarkus.logging.Log;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import net.joao.domain.AgenciaHttp;
+import net.joao.domain.SituacaoCadastral;
 import net.joao.exception.ErrosSistema.AgenciaInativaException;
 import net.joao.exception.ErrosSistema.AgenciaNaoEncontradaException;
 import net.joao.persistence.dao.AgenciaDao;
 import net.joao.persistence.models.Agencia;
-import net.joao.persistence.models.AgenciaHttp;
-import net.joao.persistence.models.SituacaoCadastral;
 
 @ApplicationScoped
 public class AgenciaService {
@@ -20,7 +20,7 @@ public class AgenciaService {
 
     @Inject
     @RestClient
-    SituacaoCadastralHttpClient httpClient;
+    AgenciaHttpClient httpClient;
 
     @Inject
     AgenciaDao dao;
@@ -64,7 +64,7 @@ public class AgenciaService {
         return 1;
     }
 
-    public int alterar(Agencia agencia) {
+    public Agencia alterar(Agencia agencia) {
         Log.info(linha + "Alterar: " + agencia.getId() + linha);
         return dao.editar(agencia);
     }

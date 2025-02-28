@@ -1,9 +1,9 @@
 package net.joao.utils;
 
+import net.joao.domain.AgenciaHttp;
+import net.joao.domain.SituacaoCadastral;
 import net.joao.persistence.models.Agencia;
-import net.joao.persistence.models.AgenciaHttp;
 import net.joao.persistence.models.Endereco;
-import net.joao.persistence.models.SituacaoCadastral;
 
 public class AgenciaFixture {
     public static Agencia criarAgencia(Integer id) {

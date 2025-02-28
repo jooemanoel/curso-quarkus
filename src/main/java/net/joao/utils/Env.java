@@ -1,17 +1,11 @@
-package net.joao.rest;
+package net.joao.utils;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
+import jakarta.enterprise.context.ApplicationScoped;
 
-@Path("/hello")
-@RequestScoped
-public class HelloResource {
+@ApplicationScoped
+public class Env {
     @ConfigProperty(name = "quarkus.datasource.db-kind")
     String dbKind;
     @ConfigProperty(name = "quarkus.datasource.username")
@@ -24,10 +18,4 @@ public class HelloResource {
     String generation;
     @ConfigProperty(name = "quarkus.rest-client.agencias-api.url")
     String quarkusRestClientAgenciasApiUrl;
-
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response hello() {
-        return Response.status(Response.Status.OK).entity("Teste do hello").build();
-    }
 }
